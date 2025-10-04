@@ -81,7 +81,6 @@ gopeed.events.onResolve(async (ctx) => {
 
     // Retourner les informations de résolution
     ctx.res = {
-      name: '',
       size: fileInfo.size,
       range: false,
       files: [
