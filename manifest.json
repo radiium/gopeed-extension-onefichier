@@ -1,9 +1,9 @@
 {
   "name": "gopeed-extention-onefichier",
-  "author": "https://github.com/radiium",
+  "author": "radiium",
   "title": "gopeed extention onefichier",
   "description": "gopeed extention for download from 1fichier.com. Requires a premium account",
-  "icon": "logo.png",
+  "icon": "icon.png",
   "version": "1.0.0",
   "homepage": "https://github.com/radiium/gopeed-extension-onefichier",
   "repository": {
