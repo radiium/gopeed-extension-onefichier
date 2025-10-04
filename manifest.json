@@ -1,0 +1,29 @@
+{
+  "name": "gopeed-extention-onefichier",
+  "author": "https://github.com/radiium",
+  "title": "gopeed extention onefichier",
+  "description": "gopeed extention for download from 1fichier.com. Requires a premium account",
+  "icon": "logo.png",
+  "version": "1.0.0",
+  "homepage": "https://github.com/radiium/gopeed-extension-onefichier",
+  "repository": {
+    "url": "https://github.com/radiium/gopeed-extension-onefichier"
+  },
+  "scripts": [
+    {
+      "event": "onResolve",
+      "match": {
+        "urls": ["*://1fichier.com/*", "*://*.1fichier.com/*"]
+      },
+      "entry": "dist/index.js"
+    }
+  ],
+  "settings": [
+    {
+      "name": "apiKey",
+      "title": "API Key 1fichier.com (premium only)",
+      "description": "Your API key (premium only)",
+      "type": "string"
+    }
+  ]
+}
