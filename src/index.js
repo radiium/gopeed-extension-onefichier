@@ -53,31 +53,30 @@ class OneFichierApi {
 }
 
 gopeed.events.onResolve(async (ctx) => {
-  gopeed.logger.info(`1fichier link resolution: ${url}`);
-
   // Récupérer la clé API depuis les paramètres
   const url = ctx.req.url;
   const apiKey = gopeed.settings.apiKey;
 
   try {
     // Init API
+
     const api = new OneFichierApi(apiKey);
-    gopeed.logger.debug(`Appel API url: ${url}`);
+    gopeed.logger.debug(`Resolve 1fichier url start: ${url}`);
 
     // Retrieve file info
     const fileInfo = await api.getFileInfo({ url });
-    gopeed.logger.debug(`Réponse API getFileInfo: ${JSON.stringify(fileInfo)}`);
+    gopeed.logger.debug(`API Response getFileInfo: ${JSON.stringify(fileInfo)}`);
 
     // Generate download link
     const fileDownload = await api.getFileDownload({ url, cdn: 0, restrict_ip: 0 });
-    gopeed.logger.debug(`Réponse API getFileDownload: ${JSON.stringify(fileDownload)}`);
+    gopeed.logger.debug(`API Response getFileDownload: ${JSON.stringify(fileDownload)}`);
 
     // Check valid download link
     if (fileDownload.status !== 'OK') {
-      throw new Error(`Erreur API 1fichier: ${fileDownload.message || 'Erreur inconnue'}`);
+      throw new Error(`API Error 1fichier: ${fileDownload.message || 'Erreur inconnue'}`);
     }
     if (!fileDownload.url) {
-      throw new Error("Aucune URL de téléchargement retournée par l'API");
+      throw new Error('No download URL returned by the API');
     }
 
     // Retourner les informations de résolution
@@ -97,10 +96,10 @@ gopeed.events.onResolve(async (ctx) => {
       ],
     };
 
-    gopeed.logger.info('Résolution terminée avec succès');
+    gopeed.logger.debug('Resolve 1fichier url success');
   } catch (error) {
-    gopeed.logger.error(`Erreur: ${error.message}`);
-    throw new Error(`Impossible de résoudre le téléchargement 1fichier: ${error.message}`);
+    gopeed.logger.error(`Error: ${JSON.stringify(error)}`);
+    throw new Error(`Unable to resolve 1fichier download: ${error.message}`);
   }
 });
 
